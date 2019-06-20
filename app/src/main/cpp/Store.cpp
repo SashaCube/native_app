@@ -78,7 +78,7 @@ Java_com_oleksandr_havryliuk_native_1app_Store_getFloat(
 
 extern "C"
 JNIEXPORT jboolean JNICALL
-Java_com_oleksandr_havryliuk_native_app_Store_getBoolean(
+Java_com_oleksandr_havryliuk_native_1app_Store_getBoolean(
         JNIEnv* pEnv,
         jobject pThis,
         jstring pKey) {
@@ -201,7 +201,7 @@ Java_com_oleksandr_havryliuk_native_1app_Store_setObject(
 
 extern "C"
 JNIEXPORT void JNICALL
-Java_com_oleksandr_havryliuk_native_1app_setFloat(
+Java_com_oleksandr_havryliuk_native_1app_Store_setFloat(
         JNIEnv* pEnv,
         jobject pThis,
         jstring pKey,
