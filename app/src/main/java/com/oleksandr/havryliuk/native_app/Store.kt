@@ -1,8 +1,30 @@
 package com.oleksandr.havryliuk.native_app
 
+import android.util.Log
 import java.lang.IllegalArgumentException
 
-class Store {
+
+interface StoreListener {
+
+    fun onIntegerSet(key: String, value: Int)
+
+    fun onStringSet(key: String, value: String)
+
+}
+
+class Store : StoreListener {
+
+    val listeners = mutableListOf<StoreListener>()
+
+    override fun onIntegerSet(key: String, value: Int) {
+        listeners.forEach { it.onIntegerSet(key, value) }
+        Log.i("store", "onIntegerSet")
+    }
+
+    override fun onStringSet(key: String, value: String) {
+        listeners.forEach { it.onStringSet(key, value) }
+        Log.i("store", "onStringSet")
+    }
 
     external fun getCount(): Int
 

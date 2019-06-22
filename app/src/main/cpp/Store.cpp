@@ -165,6 +165,10 @@ Java_com_oleksandr_havryliuk_native_1app_Store_setString(
         pEnv->GetStringUTFRegion(pString, 0, stringLength, entry->mValue.mString);
         // Append the null character for string termination.
         entry->mValue.mString[stringLength] = '\0';
+
+        jclass clazz = pEnv->GetObjectClass(pThis);
+        jmethodID methodId = pEnv->GetMethodID(clazz, "onStringSet", "(Ljava/lang/String;Ljava/lang/String;)V");
+        pEnv->CallVoidMethod(pThis, methodId, pKey, pString);
     }
 }
 
@@ -175,11 +179,16 @@ Java_com_oleksandr_havryliuk_native_1app_Store_setInteger(
         jobject pThis,
         jstring pKey,
         jint pInteger) {
+
     StoreEntry* entry = allocateEntry(pEnv, &gStore, pKey);
     if (entry != NULL) {
         entry->mType = StoreType_Integer;
         entry->mValue.mInteger = pInteger;
     }
+
+    jclass clazz = pEnv->GetObjectClass(pThis);
+    jmethodID methodId = pEnv->GetMethodID(clazz, "onIntegerSet", "(Ljava/lang/String;I)V");
+    pEnv->CallVoidMethod(pThis, methodId, pKey, pInteger);
 }
 
 extern "C"

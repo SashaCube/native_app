@@ -1,6 +1,8 @@
 package com.oleksandr.havryliuk.native_app
 
+import android.content.Context
 import android.os.Bundle
+import android.support.multidex.MultiDex
 import android.support.v7.app.AppCompatActivity
 import android.view.View
 import android.widget.*
@@ -16,6 +18,11 @@ class MainActivity : AppCompatActivity() {
 
 
     private val store = Store()
+
+    override fun attachBaseContext(base: Context) {
+        super.attachBaseContext(base)
+        MultiDex.install(this)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
